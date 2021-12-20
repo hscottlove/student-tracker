@@ -52,21 +52,21 @@ function App() {
 const data = [
   {
     id: 1,
-    name: 'scott',
-    email: 'scott@gmail.com',
-    phone: 9259496013,
+    name: 'Marcelo Garcia',
+    email: 'mgarcia@gmail.com',
+    phone: 9256496486,
   },
   {
     id: 2,
-    name: 'amanda',
+    name: 'Amanda Love',
     email: 'amanda@gmail.com',
     phone: 9259496020,
   },
   {
     id: 3,
-    name: 'Claudia',
-    email: 'claudia9@gmail.com',
-    phone: 9259496020,
+    name: 'Jim Jones',
+    email: 'jimjones77@gmail.com',
+    phone: 7136476020,
   },
 ];
 
