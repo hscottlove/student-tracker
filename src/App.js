@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import CardList from './components/CardList';
+import NavBar from './components/NavBar';
+import StudentForm from './components/StudentForm';
+import { v4 as uuidv4 } from 'uuid';
+
+export const StudentContext = React.createContext();
 
 function App() {
+  const [selectedStudentId, setSelectedStudentId] = useState();
+  const [students, setStudents] = useState(data);
+  const [search, setSearch] = useState('');
+
+  const studentContextValue = {
+    handleStudentAdd,
+    handleStudentDelete,
+  };
+
+  function handleSearch(e) {
+    setSearch(e.target.value);
+  }
+
+  function handleStudentAdd() {
+    const newStudent = {
+      id: uuidv4(),
+      name: 'name test',
+      email: 'email test',
+      phone: 'number test',
+    };
+    // setSelectedStudentId(newStudent.id);
+    setStudents([...students, newStudent]);
+  }
+
+  function handleStudentDelete(id) {
+    setStudents(students.filter((student) => student.id !== id));
+  }
+
+  const handleFilter = students.filter((student) => {
+    return student.name.toLowerCase().includes(search.toLowerCase());
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StudentContext.Provider value={studentContextValue}>
+      <NavBar handleSearch={handleSearch} />
+      <StudentForm />
+      <CardList students={handleFilter} />
+    </StudentContext.Provider>
   );
 }
+
+const data = [
+  {
+    id: 1,
+    name: 'scott',
+    email: 'scott@gmail.com',
+    phone: 9259496013,
+  },
+  {
+    id: 2,
+    name: 'amanda',
+    email: 'amanda@gmail.com',
+    phone: 9259496020,
+  },
+  {
+    id: 3,
+    name: 'Claudia',
+    email: 'claudia9@gmail.com',
+    phone: 9259496020,
+  },
+];
 
 export default App;
