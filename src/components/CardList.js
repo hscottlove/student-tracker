@@ -6,7 +6,7 @@ export default function CardList({ students }) {
   return (
     <>
       <Container>
-        <Row className='justify-content-md-center gap-3'>
+        <Row className='justify-content-center gap-4'>
           {students.map((student) => {
             return <Card key={student.id} {...student} />;
           })}
