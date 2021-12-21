@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Container, Nav, Form, FormControl } from 'react-bootstrap';
 import logo from '../images/logo.png';
+import { StudentContext } from '../App';
 
 export default function NavBar() {
+  const { handleSearchChange } = useContext(StudentContext);
   return (
     <Navbar bg='light' expand='lg' className='mb-5'>
       <Container>
@@ -23,7 +25,6 @@ export default function NavBar() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            {/* <Nav.Link href='#action1'>Home</Nav.Link> */}
             <Nav.Link href='#action2'>Logout</Nav.Link>
           </Nav>
           <Form className='d-flex'>
@@ -32,8 +33,8 @@ export default function NavBar() {
               placeholder='Search student'
               className='me-2'
               aria-label='Search'
+              onChange={handleSearchChange}
             />
-            {/* <Button variant='outline-success'>Search</Button> */}
           </Form>
         </Navbar.Collapse>
       </Container>

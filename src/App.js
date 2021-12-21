@@ -12,9 +12,14 @@ export const StudentContext = React.createContext();
 function App() {
   const [selectedStudentId, setSelectedStudentId] = useState();
   const [students, setStudents] = useState(data);
+  const [search, setSearch] = useState('');
 
   const selectedStudent = students.find((student) => {
     return student.id === selectedStudentId;
+  });
+
+  const filterStudents = students.filter((student) => {
+    return student.name.toLowerCase().includes(search.toLowerCase());
   });
 
   const studentContextValue = {
@@ -22,7 +27,12 @@ function App() {
     handleStudentDelete,
     handleStudentSelect,
     handleStudentChange,
+    handleSearchChange,
   };
+
+  function handleSearchChange(e) {
+    setSearch(e.target.value);
+  }
 
   function handleStudentSelect(id) {
     setSelectedStudentId(id);
@@ -54,9 +64,9 @@ function App() {
   return (
     <StudentContext.Provider value={studentContextValue}>
       <NavBar />
-      {!selectedStudent && <AddStudentButton />}
+      <AddStudentButton />
       {selectedStudent && <StudentEditForm student={selectedStudent} />}
-      <CardList students={students} />
+      <CardList students={filterStudents} />
     </StudentContext.Provider>
   );
 }
