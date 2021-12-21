@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import CardList from './components/CardList';
 import NavBar from './components/NavBar';
 import AddStudentButton from './components/AddStudentButton';
 import CloseStudentButton from './components/CloseStudentButton';
 import StudentEditForm from './components/StudentEditForm';
+import CardList from './components/CardList';
 import { v4 as uuidv4 } from 'uuid';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
 
 export const StudentContext = React.createContext();
@@ -43,7 +43,8 @@ function App() {
     const newStudent = {
       id: uuidv4(),
       name: '',
-      image: 'https://freesvg.org/img/abstract-user-flat-4.png',
+      image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgprFQGqxHFOm1UVGESj3v-16NVyvBiwiF-sHUGakrPBeDJ6Uh8uvJbDFMttF4dL1XGO8&usqp=CAU',
       email: '',
       phone: '',
     };
