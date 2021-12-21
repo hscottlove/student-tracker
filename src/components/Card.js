@@ -8,7 +8,7 @@ export default function CardList(props) {
     useContext(StudentContext);
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant='top' style={{ height: '100%' }} src={image} />
+      <Card.Img style={{ height: '100%' }} src={image} />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <hr />

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardList from './components/CardList';
 import NavBar from './components/NavBar';
-import StudentEditForm from './components/StudentEditForm';
 import AddStudentButton from './components/AddStudentButton';
+import CloseStudentButton from './components/CloseStudentButton';
+import StudentEditForm from './components/StudentEditForm';
 import { v4 as uuidv4 } from 'uuid';
 import './css/App.css';
 
@@ -46,6 +47,7 @@ function App() {
       email: '',
       phone: '',
     };
+
     setSelectedStudentId(newStudent.id);
     setStudents([...students, newStudent]);
   }
@@ -64,7 +66,7 @@ function App() {
   return (
     <StudentContext.Provider value={studentContextValue}>
       <NavBar />
-      <AddStudentButton />
+      {!selectedStudent ? <AddStudentButton /> : <CloseStudentButton />}
       {selectedStudent && <StudentEditForm student={selectedStudent} />}
       <CardList students={filterStudents} />
     </StudentContext.Provider>
