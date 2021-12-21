@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { StudentContext } from '../App';
 
-export default function CardList({ id, name, image, email, phone, notes }) {
-  const { handleStudentDelete } = useContext(StudentContext);
+export default function CardList(props) {
+  const { id, name, image, email, phone, notes, grade } = props;
+  const { handleStudentDelete, handleStudentSelect } =
+    useContext(StudentContext);
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant='top' style={{ height: '100%' }} src={image} />
@@ -15,9 +17,12 @@ export default function CardList({ id, name, image, email, phone, notes }) {
       <ListGroup className='list-group-flush'>
         <ListGroupItem>Email: {email}</ListGroupItem>
         <ListGroupItem>Phone: {phone}</ListGroupItem>
+        <ListGroupItem>Grade: {grade}</ListGroupItem>
       </ListGroup>
       <Card.Body>
-        <Button variant='primary'>Edit</Button>
+        <Button variant='primary' onClick={() => handleStudentSelect(id)}>
+          Edit
+        </Button>
         <Button variant='danger' onClick={() => handleStudentDelete(id)}>
           Delete
         </Button>
