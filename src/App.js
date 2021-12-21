@@ -3,21 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CardList from './components/CardList';
 import NavBar from './components/NavBar';
 import StudentEditForm from './components/StudentEditForm';
+import AddStudentButton from './components/AddStudentButton';
 import { v4 as uuidv4 } from 'uuid';
+import './css/App.css';
 
 export const StudentContext = React.createContext();
 
 function App() {
   const [selectedStudentId, setSelectedStudentId] = useState();
   const [students, setStudents] = useState(data);
-  const [search, setSearch] = useState('');
 
   const selectedStudent = students.find((student) => {
     return student.id === selectedStudentId;
-  });
-
-  const studentFilter = students.filter((student) => {
-    return student.name.toLowerCase().includes(search.toLowerCase());
   });
 
   const studentContextValue = {
@@ -25,11 +22,22 @@ function App() {
     handleStudentDelete,
     handleStudentSelect,
     handleStudentChange,
-    handleStudentSearch,
   };
 
   function handleStudentSelect(id) {
     setSelectedStudentId(id);
+  }
+
+  function handleStudentAdd() {
+    const newStudent = {
+      id: uuidv4(),
+      name: '',
+      image: 'https://freesvg.org/img/abstract-user-flat-4.png',
+      email: '',
+      phone: '',
+    };
+    setSelectedStudentId(newStudent.id);
+    setStudents([...students, newStudent]);
   }
 
   function handleStudentChange(id, student) {
@@ -39,22 +47,6 @@ function App() {
     setStudents(newStudents);
   }
 
-  function handleStudentSearch(e) {
-    setSearch(e.target.value);
-  }
-
-  function handleStudentAdd() {
-    const newStudent = {
-      id: uuidv4(),
-      name: 'name test',
-      image: 'https://freesvg.org/img/abstract-user-flat-4.png',
-      email: 'email test',
-      phone: 'number test',
-    };
-    setSelectedStudentId(newStudent.id);
-    setStudents([...students, newStudent]);
-  }
-
   function handleStudentDelete(id) {
     setStudents(students.filter((student) => student.id !== id));
   }
@@ -62,8 +54,9 @@ function App() {
   return (
     <StudentContext.Provider value={studentContextValue}>
       <NavBar />
-      <StudentEditForm selectedStudent={selectedStudent} />
-      <CardList students={studentFilter} />
+      {!selectedStudent && <AddStudentButton />}
+      {selectedStudent && <StudentEditForm student={selectedStudent} />}
+      <CardList students={students} />
     </StudentContext.Provider>
   );
 }

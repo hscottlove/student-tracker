@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navbar, Container, Nav, Form, FormControl } from 'react-bootstrap';
 import logo from '../images/logo.png';
-import { StudentContext } from '../App';
 
 export default function NavBar() {
-  const { handleStudentSearch } = useContext(StudentContext);
   return (
     <Navbar bg='light' expand='lg' className='mb-5'>
       <Container>
@@ -34,7 +32,6 @@ export default function NavBar() {
               placeholder='Search student'
               className='me-2'
               aria-label='Search'
-              onChange={(e) => handleStudentSearch(e)}
             />
             {/* <Button variant='outline-success'>Search</Button> */}
           </Form>

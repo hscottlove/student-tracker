@@ -1,22 +1,26 @@
 import React, { useContext } from 'react';
-import { Form, Row, Col, Button, Container } from 'react-bootstrap';
+import { Form, Row, Col, Container } from 'react-bootstrap';
 import { StudentContext } from '../App';
 
-export default function StudentForm({ selectedStudent }) {
-  const { handleStudentAdd, handleStudentChange } = useContext(StudentContext);
+export default function StudentForm({ student }) {
+  const { handleStudentChange } = useContext(StudentContext);
 
   function handleChange(changes) {
-    handleStudentChange(selectedStudent.id, { ...selectedStudent, ...changes });
+    handleStudentChange(student.id, { ...student, ...changes });
   }
+
   return (
     <Container>
       <Form className='mb-5'>
         <Row className='mb-3'>
-          <Form.Group as={Col} controlId='formGridName'>
+          <Form.Group as={Col} htmlFor='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
               onChange={(e) => handleChange({ name: e.target.value })}
               type='text'
+              name='name'
+              id='name'
+              value={student.name}
               placeholder='Full name'
             />
           </Form.Group>
@@ -31,11 +35,14 @@ export default function StudentForm({ selectedStudent }) {
         </Row>
 
         <Row className='mb-3'>
-          <Form.Group as={Col} controlId='formGridPhone'>
+          <Form.Group as={Col} htmlFor='phone'>
             <Form.Label>Phone</Form.Label>
             <Form.Control
               onChange={(e) => handleChange({ phone: e.target.value })}
               type='number'
+              name='phone'
+              id='phone'
+              value={student.phone}
             />
           </Form.Group>
 
@@ -65,32 +72,6 @@ export default function StudentForm({ selectedStudent }) {
             rows={3}
           />
         </Form.Group>
-
-        {/* <Row className='mb-3'>
-          <Form.Group as={Col} controlId='formGridNumber'>
-            <Form.Label>Grade</Form.Label>
-            <Form.Control type='number' />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId='formGridNumber'>
-            <Form.Label>GPA</Form.Label>
-            <Form.Control type='number' />
-          </Form.Group>
-
-          <Form.Group as={Col} controlId='formGridState'>
-            <Form.Label>Quarter</Form.Label>
-            <Form.Select defaultValue='Choose...'>
-              <option>Q1</option>
-              <option>Q2</option>
-              <option>Q3</option>
-              <option>Q4</option>
-            </Form.Select>
-          </Form.Group>
-        </Row> */}
-
-        <Button variant='primary' onClick={() => handleStudentAdd()}>
-          Add Student
-        </Button>
       </Form>
     </Container>
   );

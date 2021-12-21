@@ -26,8 +26,6 @@ export default function CardList(props) {
         <Button variant='danger' onClick={() => handleStudentDelete(id)}>
           Delete
         </Button>
-        {/* <Card.Link href='#'>Edit</Card.Link>
-        <Card.Link href='#'>Delete</Card.Link> */}
       </Card.Body>
     </Card>
   );
