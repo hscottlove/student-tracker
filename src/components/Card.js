@@ -20,7 +20,11 @@ export default function CardList(props) {
         <ListGroupItem>Grade: {grade}</ListGroupItem>
       </ListGroup>
       <Card.Body>
-        <Button variant='primary' onClick={() => handleStudentSelect(id)}>
+        <Button
+          className='me-2'
+          variant='primary'
+          onClick={() => handleStudentSelect(id)}
+        >
           Edit
         </Button>
         <Button variant='danger' onClick={() => handleStudentDelete(id)}>
