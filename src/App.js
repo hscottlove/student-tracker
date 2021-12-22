@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import AddStudentButton from './components/AddStudentButton';
 import CloseStudentButton from './components/CloseStudentButton';
@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
 
 export const StudentContext = React.createContext();
+const LOCAL_STORAGE_KEY = 'studentContact.students';
 
 function App() {
   const [selectedStudentId, setSelectedStudentId] = useState();
@@ -22,6 +23,15 @@ function App() {
   const filterStudents = students.filter((student) => {
     return student.name.toLowerCase().includes(search.toLowerCase());
   });
+
+  useEffect(() => {
+    const studentJSON = sessionStorage.getItem(LOCAL_STORAGE_KEY);
+    if (studentJSON != null) setStudents(JSON.parse(studentJSON));
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(students));
+  }, [students]);
 
   const studentContextValue = {
     handleStudentAdd,
